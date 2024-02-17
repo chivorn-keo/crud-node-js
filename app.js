@@ -5,18 +5,18 @@ const categoryRoute = require('./routes/category-route');
 const connectDatabase = require('./database/connect-database');
 const setGlobalVar = require('./middlewares/set-global-var-middleware');
 const methodOverride = require('method-override');
-const expressLayouts = require('express-ejs-layouts');
+const expressEjsExtend = require('express-ejs-extend');
 
 const app = express();
 
 app.set('port', 8000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.set("layout", { layout: "template/master" });
+
+app.engine('ejs', expressEjsExtend);
 
 // Middleware
 app.use(methodOverride('_method'));
-app.use(expressLayouts);
 app.use(express.static('./public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
