@@ -1,0 +1,108 @@
+<main>
+  <div class="container-fluid px-4">
+    <h1 class="mt-4">Categories</h1>
+
+    <%- include('../template/partials/breadcrumb.ejs') %>
+
+    <div class="card mb-4">
+      <div class="card-header">
+        <div class="d-flex justify-content-between">
+          <span>
+            <i class="fas fa-table me-1"></i>
+            Categories
+          </span>
+          <a href="/categories/create" class="btn btn-success">
+            <i class="fa-solid fa-plus"></i> create
+          </a>
+        </div>
+      </div>
+      <div class="card-body">
+        <table id="datatablesSimple">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Action</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            <% categories.forEach(category => { %>
+            <tr>
+              <th><%- category.name %></th>
+              <th><%- category.description %></th>
+              <th>
+                <a
+                  href="<%= `/categories/${category._id}/edit` %>"
+                  class="btn btn-sm btn-primary"
+                >
+                  <i class="fa-solid fa-pen-to-square"></i> Edit
+                </a>
+
+                <button
+                  type="button"
+                  class="btn btn-sm btn-danger"
+                  data-bs-toggle="modal"
+                  data-bs-target="#delete-modal"
+                >
+                  <i class="fa-solid fa-trash"></i> Delete
+                </button>
+              </th>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<!-- <div
+  class="modal fade"
+  id="delete-modal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form
+        action="<%= `/categories/${1}?_method=DELETE` %>"
+        method="POST"
+      >
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            Do you want to delete this record?
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-sm btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            <i class="fa-solid fa-xmark"></i> No
+          </button>
+          <button class="btn btn-sm btn-danger">
+            <i class="fa-solid fa-trash"></i> Yes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> -->
