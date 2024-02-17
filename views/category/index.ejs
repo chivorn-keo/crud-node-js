@@ -41,6 +41,12 @@
               <th><%- category.description %></th>
               <th>
                 <a
+                  href="<%= `/categories/${category._id}` %>"
+                  class="btn btn-sm btn-warning card-link"
+                >
+                  <i class="fa-solid fa-eye"></i> View
+                </a>
+                <a
                   href="<%= `/categories/${category._id}/edit` %>"
                   class="btn btn-sm btn-primary"
                 >

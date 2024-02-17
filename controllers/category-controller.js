@@ -22,8 +22,22 @@ const storeCategory = async (req, res) => {
     name: req.body.name,
     description: req.body.description
   }
-  await Category.create(category);
-  res.redirect('/categories');
+  const categoryCreated = await Category.create(category);
+  
+  res.redirect(`/categories/${categoryCreated._id}`);
+}
+
+const showCategory = async (req, res) => {
+  const { id: categoryId } = req.params;
+  const category = await Category.findOne({ _id: categoryId});
+
+  if(!category){
+    res.redirect('/categories');
+  }
+  console.log(category);
+  res.render('category/show', {
+    category: category
+  });
 }
 
 const editCategory = async (req, res) => {
@@ -52,7 +66,7 @@ const updateCategory = async (req, res) => {
     res.redirect('/categories');
   }
 
-  res.redirect('/categories');
+  res.redirect(`/categories/${categoryId}`);
 }
 
 const deleteCategory = async (req, res) => {
@@ -70,6 +84,7 @@ module.exports = {
   getAllCategories,
   createCategory,
   storeCategory,
+  showCategory,
   editCategory,
   updateCategory,
   deleteCategory

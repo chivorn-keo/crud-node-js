@@ -1,4 +1,7 @@
-<% segments = currentUrl.replace(/^\/|\/$/g, '').split('/'); %>
+<% 
+  segments = currentUrl.replace(/^\/|\/$/g, '').split('/'); 
+  urlSegment = baseUrl;
+%>
 <ol class="breadcrumb mb-4">
   <li class="breadcrumb-item">
     <a href="/">Dashboard</a>
@@ -6,7 +9,11 @@
   <% segments.forEach((segment, index) => { %> <% if (index !== segments.length
   - 1) { %>
   <li class="breadcrumb-item">
-    <a href="<%= baseUrl + '/' + segment %>"><%= segment %></a>
+    <%
+      urlSegment = `${urlSegment}/${segment}`;
+      console.log(urlSegment);
+    %>
+    <a href="<%= urlSegment %>"><%= segment %></a>
   </li>
 
   <% }else { %>

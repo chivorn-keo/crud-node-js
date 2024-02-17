@@ -1,0 +1,36 @@
+<% extend('../template/master') %>
+
+<main>
+  <div class="container-fluid px-4">
+    <h1 class="mt-4">Create Category</h1>
+    <%- include('../template/partials/breadcrumb.ejs') %>
+
+    <div class="card">
+      <!-- <img src="..." class="card-img-top" alt="..."> -->
+      <div class="card-body">
+        <h5 class="card-title"><%= category.name %></h5>
+        <p class="card-text"><%= category.description %></p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Created at : <%= category.createdAt %></li>
+        <li class="list-group-item">Updated At : <%= category.updatedAt %></li>
+      </ul>
+      <div class="card-body">
+        <a
+          href="<%= `/categories/${category._id}/edit` %>"
+          class="btn btn-sm btn-primary card-link"
+        >
+          <i class="fa-solid fa-pen-to-square"></i> Edit
+        </a>
+        <button
+          type="button"
+          class="btn btn-sm btn-danger card-link"
+          data-bs-toggle="modal"
+          data-bs-target="#delete-modal"
+        >
+          <i class="fa-solid fa-trash"></i> Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</main>
