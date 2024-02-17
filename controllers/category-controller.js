@@ -6,6 +6,7 @@ const getAllCategories = async (req, res) => {
   res.render('category/index', {
     categories: categories
   });
+  //testing
 }
 
 const createCategory = (req, res) => {
