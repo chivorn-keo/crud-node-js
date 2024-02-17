@@ -22,9 +22,11 @@
         >
           <i class="fa-solid fa-pen-to-square"></i> Edit
         </a>
+
         <button
           type="button"
-          class="btn btn-sm btn-danger card-link"
+          class="btn btn-sm btn-danger delete-record"
+          data-delete-url="<%= `/categories/${category._id}?_method=DELETE` %>"
           data-bs-toggle="modal"
           data-bs-target="#delete-modal"
         >

@@ -55,7 +55,8 @@
 
                 <button
                   type="button"
-                  class="btn btn-sm btn-danger"
+                  class="btn btn-sm btn-danger delete-record"
+                  data-delete-url="<%= `/categories/${category._id}?_method=DELETE` %>"
                   data-bs-toggle="modal"
                   data-bs-target="#delete-modal"
                 >
@@ -71,46 +72,3 @@
   </div>
 </main>
 
-<!-- Button trigger modal -->
-
-<!-- Modal -->
-<!-- <div
-  class="modal fade"
-  id="delete-modal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form
-        action="<%= `/categories/${1}?_method=DELETE` %>"
-        method="POST"
-      >
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">
-            Do you want to delete this record?
-          </h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-sm btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            <i class="fa-solid fa-xmark"></i> No
-          </button>
-          <button class="btn btn-sm btn-danger">
-            <i class="fa-solid fa-trash"></i> Yes
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div> -->
