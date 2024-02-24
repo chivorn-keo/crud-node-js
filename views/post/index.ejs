@@ -1,0 +1,79 @@
+<% extend('../template/master') %>
+
+<main>
+  <div class="container-fluid px-4">
+    <h1 class="mt-4">Posts</h1>
+
+    <%- include('../template/partials/alert-message.ejs') %>
+
+    <%- include('../template/partials/breadcrumb.ejs') %>
+
+    <div class="card mb-4">
+      <div class="card-header">
+        <div class="d-flex justify-content-between">
+          <span>
+            <i class="fas fa-table me-1"></i>
+            Posts
+          </span>
+          <a href="/posts/create" class="btn btn-success">
+            <i class="fa-solid fa-plus"></i> create
+          </a>
+        </div>
+      </div>
+      <div class="card-body">
+        <table id="datatablesSimple">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Description</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Description</th>
+              <th>Action</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            <% posts.forEach(post => { %>
+            <tr>
+              <th><%- post.name %></th>
+              <th><a href="<%= `/categories/${post.category._id.toString()}` %>"><%= post.category.name %></a></th>
+              <th><%- post.description %></th>
+              <th>
+                <a
+                  href="<%= `/posts/${post._id}` %>"
+                  class="btn btn-sm btn-warning card-link"
+                >
+                  <i class="fa-solid fa-eye"></i> View
+                </a>
+                <a
+                  href="<%= `/posts/${post._id}/edit` %>"
+                  class="btn btn-sm btn-primary"
+                >
+                  <i class="fa-solid fa-pen-to-square"></i> Edit
+                </a>
+
+                <button
+                  type="button"
+                  class="btn btn-sm btn-danger delete-record"
+                  data-delete-url="<%= `/posts/${post._id}?_method=DELETE` %>"
+                  data-bs-toggle="modal"
+                  data-bs-target="#delete-modal"
+                >
+                  <i class="fa-solid fa-trash"></i> Delete
+                </button>
+              </th>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+

@@ -1,0 +1,13 @@
+<% 
+  messages = successMsg.length > 0 ? successMsg : [];
+  messages = errorMsg.length > 0 ? errorMsg : messages;
+%>
+
+<% if (messages.length > 0) { %>
+  <% messages.forEach(msg => { %>
+    <div class="alert alert-<%= successMsg.length >0 ? 'success' : 'danger' %> alert-dismissible fade show" role="alert">
+      <%= msg %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+   <% }) %>
+<% } %>

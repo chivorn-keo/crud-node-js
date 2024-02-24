@@ -10,6 +10,30 @@ function generateRandomString(length) {
   return randomString;
 }
 
+function redirectWithMessage(req, res, url, type, message){
+  switch (type) {
+    case 'success':
+      req.flash('success', message);
+      break;
+    case 'error':
+      req.flash('error', message);
+      break;
+    default:
+      break;
+  }
+  return res.redirect(url);
+}
+
+function renderViewWithMessage(req, res, view, data)
+{
+  var successMsg = req.flash('success');
+  var errorMsg = req.flash('error');
+
+  return res.render(view, { ...data, successMsg, errorMsg });
+}
+
 module.exports = {
-  generateRandomString
+  generateRandomString,
+  redirectWithMessage,
+  renderViewWithMessage
 }

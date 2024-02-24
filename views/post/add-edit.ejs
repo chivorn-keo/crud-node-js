@@ -1,0 +1,44 @@
+<% extend('../template/master') %>
+
+<main>
+  <div class="container-fluid px-4">
+    <h1 class="mt-4"><%= (action == 'edit') ? 'Edit' : 'create' %> Post</h1>
+    <%- include('../template/partials/breadcrumb.ejs') %>
+
+    <form 
+      action="<%= (action == 'edit') ? `/posts/${post._id}?_method=PUT` : '/posts' %>" 
+      method="POST"
+    >
+
+      <div class="row">
+        <div class="col-md-6">
+          <label for="name" class="form-label">Name:</label>
+          <input type="text" name="name" class="form-control" id="name" placeholder="Enter name" value="<%= (action == 'edit') ? post.name : '' %>" required>
+        </div>
+  
+        <div class="col-md-6">
+          <label for="name" class="form-label">Category:</label>
+          <select name="category" id="category" class="form-control">
+            <% categories.forEach(category => { %>
+             <option 
+                value="<%= category._id %>" 
+                <%= (action == 'edit') && (post.category._id.toString() == category._id) ? 'selected' : '' %> 
+              >
+                <%= category.name %>
+              </option>
+            <% }) %>
+          </select>
+        </div>
+  
+        <div class="col-md-12">
+            <label for="description" class="form-label">Description:</label>
+            <textarea class="form-control" name="description" id="description" rows="3" placeholder="Enter description"><%= (action == 'edit') ? post.description : '' %></textarea>
+        </div>
+
+      </div>
+
+      <a href="/post" class="btn btn-sm btn-secondary mt-2"><i class="fa-solid fa-xmark"></i> cancel</a>
+      <button type="submit" class="btn btn-sm btn-primary mt-2"><i class="fa-solid fa-floppy-disk"></i> save</button>
+    </form>
+  </div>
+</main>

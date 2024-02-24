@@ -2,24 +2,27 @@
 
 <main>
   <div class="container-fluid px-4">
-    <h1 class="mt-4">Create Category</h1>
+    <h1 class="mt-4">Show Post</h1>
+    
     <%- include('../template/partials/breadcrumb.ejs') %>
+    <%- include('../template/partials/alert-message.ejs') %>
 
     <div class="card">
       <!-- <img src="..." class="card-img-top" alt="..."> -->
       <div class="card-body">
         <div class="card-text">
-          <p><b>Name</b> : <%= category.name %></p>
-          <p><b>Description</b> : <%= category.description %></p>
+          <p><b>Name</b> : <%= post.name %></p>
+          <p><b>Category</b> : <a href="<%= `/categories/${post.category._id.toString()}` %>"><%= post.category.name %></a></p>
+          <p><b>Description</b> : <%= post.description %></p>
         </div>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item"><b>Created at</b> : <%= category.createdAt %></li>
-        <li class="list-group-item"><b>Updated At</b> : <%= category.updatedAt %></li>
+        <li class="list-group-item"><b>Created at</b> : <%= post.createdAt %></li>
+        <li class="list-group-item"><b>Updated At</b> : <%= post.updatedAt %></li>
       </ul>
       <div class="card-body">
         <a
-          href="<%= `/categories/${category._id}/edit` %>"
+          href="<%= `/posts/${post._id}/edit` %>"
           class="btn btn-sm btn-primary card-link"
         >
           <i class="fa-solid fa-pen-to-square"></i> Edit
@@ -28,7 +31,7 @@
         <button
           type="button"
           class="btn btn-sm btn-danger delete-record"
-          data-delete-url="<%= `/categories/${category._id}?_method=DELETE` %>"
+          data-delete-url="<%= `/posts/${post._id}?_method=DELETE` %>"
           data-bs-toggle="modal"
           data-bs-target="#delete-modal"
         >
