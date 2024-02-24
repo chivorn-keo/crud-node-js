@@ -5,52 +5,80 @@ const {
 } = require('../helpers/general-helper')
 
 const getAllCategories = async (req, res) => {
-  const categories = await Category.find({});
-  return renderViewWithMessage(req, res, 'category/index', { categories: categories });
+  try {
+    const categories = await Category.find({});
+    return renderViewWithMessage(req, res, 'category/index', { categories: categories });
+  } catch (error) {
+    next(error);
+  }
 }
 
 const createCategory = (req, res) => {
-  const category = new Category();
-  return renderViewWithMessage(req, res, 'category/add-edit', {
-    action: 'create',
-    category: category
-  });
+  try {
+    const category = new Category();
+    return renderViewWithMessage(req, res, 'category/add-edit', {
+      action: 'create',
+      category: category
+    });
+  } catch (error) {
+    next(error);
+  }
 }
 
 const storeCategory = async (req, res) => {
-  const categoryCreated = await Category.create({
-    name: req.body.name,
-    description: req.body.description
-  });
-  return redirectWithMessage(req, res, `/categories/${categoryCreated._id}`, 'success', 'Category was created successfully');
+  try {
+    const categoryCreated = await Category.create({
+      name: req.body.name,
+      description: req.body.description
+    });
+    return redirectWithMessage(req, res, `/categories/${categoryCreated._id}`, 'success', 'Category was created successfully');
+  } catch (error) {
+    next(error);
+  }
 }
 
-const showCategory = async (req, res) => {
-  const category = await Category.findOne({ _id: req.params.id});
-  return renderViewWithMessage(req, res, 'category/show', {
-    category: category
-  });
+const showCategory = async (req, res, next) => {
+  try {
+    const category = await Category.findOne({ _id: req.params.id});
+    return renderViewWithMessage(req, res, 'category/show', {
+      category: category
+    });
+  } catch (error) {
+    next(error);
+  }
 }
 
 const editCategory = async (req, res) => {
-  const category = await Category.findOne({ _id: req.params.id });
-  res.render('category/add-edit', {
-    action: 'edit',
-    category: category
-  });
+  try {
+    const category = await Category.findOne({ _id: req.params.id });
+    res.render('category/add-edit', {
+      action: 'edit',
+      category: category
+    });
+  } catch (error) {
+    next(error);
+  }
 }
 
 const updateCategory = async (req, res) => {
-  const category = await Category.findOneAndUpdate({_id: req.params.id}, {
-    name: req.body.name,
-    description: req.body.description
-  });
-  return redirectWithMessage(req, res, `/categories/${category._id}`, 'success', 'Category was updated successfully');
+  try {
+    const category = await Category.findOneAndUpdate({_id: req.params.id}, {
+      name: req.body.name,
+      description: req.body.description
+    });
+    return redirectWithMessage(req, res, `/categories/${category._id}`, 'success', 'Category was updated successfully');
+  } catch (error) {
+    next(error);
+  }
 }
 
 const deleteCategory = async (req, res) => {
-  const category = await Category.findOneAndDelete({ _id: req.params.id });
-  return redirectWithMessage(req, res, '/categories', 'success', 'Category was deleted successfully');
+  try {
+    const category = await Category.findOneAndDelete({ _id: req.params.id });
+    return redirectWithMessage(req, res, '/categories', 'success', 'Category was deleted successfully');
+  } catch (error) {
+    next(error);
+  }
 }
 
 module.exports = {

@@ -1,11 +1,11 @@
 const path = require('path');
-const bodyParser = require('body-parser');
 const express = require('express');
 const dashboardRoute = require('./routes/dashboard-route');
 const categoryRoute = require('./routes/category-route');
 const postRoute = require('./routes/post-route');
 const connectDatabase = require('./database/connect-database');
 const setGlobalVar = require('./middlewares/set-global-var-middleware');
+const errorHandler = require('./middlewares/error-handler');
 const methodOverride = require('method-override');
 const expressEjsExtend = require('express-ejs-extend');
 const session = require('express-session');
@@ -37,6 +37,7 @@ app.use(setGlobalVar);
 app.use('/', dashboardRoute);
 app.use('/categories', categoryRoute);
 app.use('/posts', postRoute);
+app.use(errorHandler)
 
 
 const start = async () => {
