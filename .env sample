@@ -1,1 +1,5 @@
+# mongo URI
 MONGO_URI=uri
+
+# session life time in minute
+SESSION_LIFE_TIME=60 
