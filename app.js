@@ -1,6 +1,3 @@
-const path = require('path');
-const express = require('express');
-
 const dashboardRoute = require('./routes/dashboard-route');
 const categoryRoute = require('./routes/category-route');
 const postRoute = require('./routes/post-route');
@@ -11,6 +8,9 @@ const errorHandlerMiddleware = require('./middlewares/error-handler-middleware')
 const authMiddleware = require('./middlewares/auth-middleware');
 
 const connectDatabase = require('./database/connect-database');
+
+const path = require('path');
+const express = require('express');
 const methodOverride = require('method-override');
 const expressEjsExtend = require('express-ejs-extend');
 const session = require('express-session');
@@ -31,7 +31,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(session({
   secret: 'secret',
-  cookie: { maxAge: 60000 },
+  cookie: { maxAge: process.env.SESSION_LIFE_TIME * 60000 },
   resave: false,
   saveUninitialized: false
 }));
