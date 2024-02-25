@@ -6,8 +6,9 @@ const categoryRoute = require('./routes/category-route');
 const postRoute = require('./routes/post-route');
 const authRoute = require('./routes/auth-route');
 
-const setGlobalVar = require('./middlewares/set-global-var-middleware');
-const errorHandler = require('./middlewares/error-handler');
+const setGlobalVarMiddleware = require('./middlewares/set-global-var-middleware');
+const errorHandlerMiddleware = require('./middlewares/error-handler-middleware');
+const unauthenticatedMiddleware = require('./middlewares/unauthenticated-middleware');
 
 const connectDatabase = require('./database/connect-database');
 const methodOverride = require('method-override');
@@ -35,14 +36,14 @@ app.use(session({
   saveUninitialized: false
 }));
 app.use(flash());
-app.use(setGlobalVar);
+app.use(setGlobalVarMiddleware);
 
 // Route
-app.use('/', dashboardRoute);
 app.use('/auth', authRoute);
-app.use('/categories', categoryRoute);
-app.use('/posts', postRoute);
-app.use(errorHandler)
+app.use('/', unauthenticatedMiddleware, dashboardRoute);
+app.use('/categories', unauthenticatedMiddleware, categoryRoute);
+app.use('/posts', unauthenticatedMiddleware, postRoute);
+app.use(errorHandlerMiddleware);
 
 
 const start = async () => {
