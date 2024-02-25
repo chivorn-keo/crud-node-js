@@ -1,4 +1,4 @@
-const unauthenticatedMiddleware = (req, res, next) => {
+const authMiddleware = (req, res, next) => {
   if (req.session && req.session.user) {
     return next();
   } else {
@@ -6,4 +6,4 @@ const unauthenticatedMiddleware = (req, res, next) => {
   }
 };
 
-module.exports = unauthenticatedMiddleware;
+module.exports = authMiddleware;

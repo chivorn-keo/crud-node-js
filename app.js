@@ -8,7 +8,7 @@ const authRoute = require('./routes/auth-route');
 
 const setGlobalVarMiddleware = require('./middlewares/set-global-var-middleware');
 const errorHandlerMiddleware = require('./middlewares/error-handler-middleware');
-const unauthenticatedMiddleware = require('./middlewares/unauthenticated-middleware');
+const authMiddleware = require('./middlewares/auth-middleware');
 
 const connectDatabase = require('./database/connect-database');
 const methodOverride = require('method-override');
@@ -40,9 +40,9 @@ app.use(setGlobalVarMiddleware);
 
 // Route
 app.use('/auth', authRoute);
-app.use('/', unauthenticatedMiddleware, dashboardRoute);
-app.use('/categories', unauthenticatedMiddleware, categoryRoute);
-app.use('/posts', unauthenticatedMiddleware, postRoute);
+app.use('/', authMiddleware, dashboardRoute);
+app.use('/categories', authMiddleware, categoryRoute);
+app.use('/posts', authMiddleware, postRoute);
 app.use(errorHandlerMiddleware);
 
 
