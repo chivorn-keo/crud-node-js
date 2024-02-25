@@ -24,7 +24,7 @@ function redirectWithMessage(req, res, url, type, message){
   return res.redirect(url);
 }
 
-function renderViewWithMessage(req, res, view, data)
+function renderViewWithMessage(req, res, view, data = {})
 {
   var successMsg = req.flash('success');
   var errorMsg = req.flash('error');
